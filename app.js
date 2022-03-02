@@ -1,8 +1,10 @@
-const { connectDB } = require('./db/connect.js')
+const { connectDB } = require('./db/connect')
 const express = require('express')
 const dotenv = require('dotenv')
 const tasks = require('./routes/tasks')
 const cors = require('cors')
+const notFound = require('./middleware/not-found')
+const erroHandler = require('./middleware/error-handler')
 
 dotenv.config()
 
@@ -16,6 +18,7 @@ app
 
 app.use('/api/v1/tasks', tasks)
 
+app.use(notFound)
 
 // declare a start function
 const start = async () => {
