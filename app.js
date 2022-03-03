@@ -21,7 +21,6 @@ const PORT = process.env.PORT || 3000
 const DB_AUTH_URI = process.env.DB_AUTH_URI
 app.use('/api/v1/tasks', tasks)
 
-app.use(notFound)
 
 // declare a start function
 const start = async () => {
