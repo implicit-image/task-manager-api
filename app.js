@@ -4,18 +4,21 @@ const dotenv = require('dotenv')
 const tasks = require('./routes/tasks')
 const cors = require('cors')
 const notFound = require('./middleware/not-found')
-const erroHandler = require('./middleware/error-handler')
+const errorHandler = require('./middleware/error-handler')
 
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT
-const DB_AUTH_URI = process.env.DB_AUTH_URI
 
 app
   .use(express.json())
   .use(cors())
+  .use(notFound)
+  .use(errorHandler)
 
+
+const PORT = process.env.PORT || 3000
+const DB_AUTH_URI = process.env.DB_AUTH_URI
 app.use('/api/v1/tasks', tasks)
 
 app.use(notFound)
